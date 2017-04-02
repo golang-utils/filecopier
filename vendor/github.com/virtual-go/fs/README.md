@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/virtual-go/vfs.svg?branch=master)](https://travis-ci.org/virtual-go/vfs)
-[![Coverage](https://codecov.io/gh/virtual-go/vfs/branch/master/graph/badge.svg)](https://codecov.io/gh/virtual-go/vfs)
+[![Build Status](https://travis-ci.org/virtual-go/fs.svg?branch=master)](https://travis-ci.org/virtual-go/fs)
+[![Coverage](https://codecov.io/gh/virtual-go/fs/branch/master/graph/badge.svg)](https://codecov.io/gh/virtual-go/fs)
 
 # problem statement
 
@@ -20,7 +20,7 @@ golang package virtualizing fs interactions
 
 for every release:
 
-- source code will be [tagged](https://github.com/virtual-go/vfs/tags).
+- source code will be [tagged](https://github.com/virtual-go/fs/tags).
 
 # Versioning
 
