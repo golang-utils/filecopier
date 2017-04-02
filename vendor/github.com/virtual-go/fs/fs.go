@@ -1,11 +1,13 @@
-package vfs
+package fs
 
-//go:generate counterfeiter -o ./fake.go --fake-name Fake ./ Vfs
+//go:generate counterfeiter -o ./fake.go --fake-name Fake ./ FS
 
-import "os"
+import (
+	"os"
+)
 
 // virtual filesystem interface
-type Vfs interface {
+type FS interface {
 	// Chmod changes the mode of the named file to mode.
 	// If the file is a symbolic link, it changes the mode of the link's target.
 	// If there is an error, it will be of type *PathError.

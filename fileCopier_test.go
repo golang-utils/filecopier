@@ -4,7 +4,7 @@ import (
 	"errors"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/virtual-go/vfs"
+	"github.com/virtual-go/fs"
 	"io/ioutil"
 	"os"
 )
@@ -21,7 +21,7 @@ var _ = Context("fileCopier", func() {
 			/* arrange */
 			providedSrcPath := "dummySrcPath"
 
-			fakeFs := new(vfs.Fake)
+			fakeFs := new(fs.Fake)
 			// trigger exit
 			fakeFs.OpenReturns(nil, errors.New("dummyError"))
 
@@ -40,7 +40,7 @@ var _ = Context("fileCopier", func() {
 				/* arrange */
 				expectedError := errors.New("dummyError")
 
-				fakeFs := new(vfs.Fake)
+				fakeFs := new(fs.Fake)
 				fakeFs.OpenReturns(nil, expectedError)
 
 				objectUnderTest := fileCopier{
@@ -60,7 +60,7 @@ var _ = Context("fileCopier", func() {
 				providedSrcPath := "dummySrcPath"
 				providedDstPath := "dummyDstPath"
 
-				fakeFs := new(vfs.Fake)
+				fakeFs := new(fs.Fake)
 				// trigger exit
 				fakeFs.StatReturns(nil, errors.New("dummyError"))
 
@@ -79,7 +79,7 @@ var _ = Context("fileCopier", func() {
 					/* arrange */
 					expectedError := errors.New("dummyError")
 
-					fakeFs := new(vfs.Fake)
+					fakeFs := new(fs.Fake)
 					fakeFs.StatReturns(nil, expectedError)
 
 					objectUnderTest := fileCopier{
@@ -98,7 +98,7 @@ var _ = Context("fileCopier", func() {
 					/* arrange */
 					providedDstPath := "dummyDstPath"
 
-					fakeFs := new(vfs.Fake)
+					fakeFs := new(fs.Fake)
 					// trigger exit
 					fakeFs.CreateReturns(nil, errors.New("dummyError"))
 
@@ -117,7 +117,7 @@ var _ = Context("fileCopier", func() {
 						/* arrange */
 						expectedError := errors.New("dummyError")
 
-						fakeFs := new(vfs.Fake)
+						fakeFs := new(fs.Fake)
 						fakeFs.CreateReturns(nil, expectedError)
 
 						objectUnderTest := fileCopier{
@@ -136,7 +136,7 @@ var _ = Context("fileCopier", func() {
 						/* arrange */
 						providedDstPath := "dummyDstPath"
 
-						fakeFs := new(vfs.Fake)
+						fakeFs := new(fs.Fake)
 
 						// create a real srcFile; no good way to stub os.FileInfo
 						srcFile, err := ioutil.TempFile("", "fileCopier_test")
@@ -170,7 +170,7 @@ var _ = Context("fileCopier", func() {
 					Context("os.Chmod errors", func() {
 						It("should return expected error", func() {
 							/* arrange */
-							fakeFs := new(vfs.Fake)
+							fakeFs := new(fs.Fake)
 
 							// create a real srcFile; no good way to stub os.FileInfo
 							srcFile, err := ioutil.TempFile("", "fileCopier_test")
@@ -202,7 +202,7 @@ var _ = Context("fileCopier", func() {
 						It("doesn't error", func() {
 
 							/* arrange */
-							fakeFs := new(vfs.Fake)
+							fakeFs := new(fs.Fake)
 
 							// create a real srcFile; no good way to stub os.FileInfo
 							srcFile, err := ioutil.TempFile("", "fileCopier_test")
