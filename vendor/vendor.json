@@ -165,16 +165,16 @@
 			"revisionTime": "2016-03-05T21:39:52Z"
 		},
 		{
-			"checksumSHA1": "pLZ5BU3jahIsIsrbJbqg2fbCBw0=",
+			"checksumSHA1": "bUW2EgOVl2ylWG3ApLnDokrjNYg=",
 			"path": "github.com/virtual-go/fs",
-			"revision": "5185240b732f6c7766c97e93862422ec2da97197",
-			"revisionTime": "2017-04-02T01:50:31Z"
+			"revision": "42a86c1b4bd9306c3785a29510411e22e566b2b3",
+			"revisionTime": "2017-04-02T18:23:26Z"
 		},
 		{
-			"checksumSHA1": "770ybk1KcZmyv0Kl9NlRkF3G/g0=",
+			"checksumSHA1": "tIGJS5KKcTT2usSrVQie9+ou6X8=",
 			"path": "github.com/virtual-go/fs/osfs",
-			"revision": "5185240b732f6c7766c97e93862422ec2da97197",
-			"revisionTime": "2017-04-02T01:50:31Z"
+			"revision": "42a86c1b4bd9306c3785a29510411e22e566b2b3",
+			"revisionTime": "2017-04-02T18:23:26Z"
 		}
 	],
 	"rootPath": "github.com/virtual-go/filecopier"

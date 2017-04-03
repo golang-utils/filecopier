@@ -27,6 +27,10 @@ func (this _fs) Open(name string) (*os.File, error) {
 	return os.Open(name)
 }
 
+func (this _fs) OpenFile(name string, flag int, perm os.FileMode) (*os.File, error) {
+	return os.OpenFile(name, flag, perm)
+}
+
 func (this _fs) RemoveAll(path string) error {
 	return os.RemoveAll(path)
 }
