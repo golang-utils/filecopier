@@ -49,14 +49,14 @@ The current chief maintainer for the project is Chris Dostert
 
 ## Decision Making
 
-[virtual-go/filecopier](https://github.com/virtual-go/filecopier) is an
+[golang-utils/filecopier](https://github.com/golang-utils/filecopier) is an
 open-source project with an open design philosophy. This means that the
 repository is the source of truth for EVERY aspect of the project,
 including its philosophy, design, roadmap and APIs. *If it's part of the
 project, it's in the repo.*
 
 All decisions affecting
-[virtual-go/filecopier](https://github.com/virtual-go/filecopier), big and
+[golang-utils/filecopier](https://github.com/golang-utils/filecopier), big and
 small, follow the same steps:
 
 * Step 1: A pull request is opened.

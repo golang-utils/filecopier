@@ -9,5 +9,5 @@ import (
 
 func Test(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "virtual-go/filecopier")
+	RunSpecs(t, "golang-utils/filecopier")
 }

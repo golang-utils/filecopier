@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/virtual-go/filecopier.svg?branch=master)](https://travis-ci.org/virtual-go/filecopier)
-[![Coverage](https://codecov.io/gh/virtual-go/filecopier/branch/master/graph/badge.svg)](https://codecov.io/gh/virtual-go/filecopier)
+[![Build Status](https://travis-ci.org/golang-utils/filecopier.svg?branch=master)](https://travis-ci.org/golang-utils/filecopier)
+[![Coverage](https://codecov.io/gh/golang-utils/filecopier/branch/master/graph/badge.svg)](https://codecov.io/gh/golang-utils/filecopier)
 
 # problem statement
 
-golang package for copying files in virtual-go
+golang package for copying files
 
 # features
 
@@ -19,7 +19,7 @@ golang package for copying files in virtual-go
 
 for every release:
 
-- source code will be [tagged](https://github.com/virtual-go/filecopier/tags).
+- source code will be [tagged](https://github.com/golang-utils/filecopier/tags).
 
 # Versioning
 
