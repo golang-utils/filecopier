@@ -3,47 +3,46 @@ package filecopier
 //go:generate counterfeiter -o ./fake.go --fake-name Fake ./ FileCopier
 
 import (
-	"github.com/virtual-go/fs"
-	"github.com/virtual-go/fs/osfs"
+	"github.com/golang-interfaces/vos"
 	"io"
 )
 
 type FileCopier interface {
-	// copies a fs file from srcPath to dstPath. Creates or overwrites the destination as needed.
-	Fs(srcPath string, dstPath string) (err error)
+	// copies an OS file from srcPath to dstPath. Creates or overwrites the destination as needed.
+	OS(srcPath string, dstPath string) (err error)
 }
 
 func New() FileCopier {
 	return fileCopier{
-		fs: osfs.New(),
+		os: vos.New(),
 	}
 }
 
 type fileCopier struct {
-	fs fs.FS
+	os vos.VOS
 }
 
-func (this fileCopier) Fs(srcPath string, dstPath string) (err error) {
-	srcFile, err := this.fs.Open(srcPath)
+func (fc fileCopier) OS(srcPath string, dstPath string) (err error) {
+	srcFile, err := fc.os.Open(srcPath)
 	if nil != err {
 		return
 	}
 	defer srcFile.Close()
 
-	srcFileInfo, err := this.fs.Stat(srcPath)
+	srcFileInfo, err := fc.os.Stat(srcPath)
 	if nil != err {
 		return
 	}
 
 	// copy content
-	writer, err := this.fs.Create(dstPath)
+	writer, err := fc.os.Create(dstPath)
 	if nil != err {
 		return
 	}
 	defer writer.Close()
 
 	// copy mode
-	err = this.fs.Chmod(dstPath, srcFileInfo.Mode())
+	err = fc.os.Chmod(dstPath, srcFileInfo.Mode())
 	if nil != err {
 		return
 	}

@@ -4,7 +4,7 @@ import (
 	"errors"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/virtual-go/fs"
+	"github.com/golang-interfaces/vos"
 	"io/ioutil"
 	"os"
 )
@@ -16,39 +16,39 @@ var _ = Context("fileCopier", func() {
 			Expect(New()).Should(Not(BeNil()))
 		})
 	})
-	Context("Fs", func() {
+	Context("OS", func() {
 		It("should call fs.Open w/ expected args", func() {
 			/* arrange */
 			providedSrcPath := "dummySrcPath"
 
-			fakeFs := new(fs.Fake)
+			fakeOS := new(vos.Fake)
 			// trigger exit
-			fakeFs.OpenReturns(nil, errors.New("dummyError"))
+			fakeOS.OpenReturns(nil, errors.New("dummyError"))
 
 			objectUnderTest := fileCopier{
-				fs: fakeFs,
+				os: fakeOS,
 			}
 
 			/* act */
-			objectUnderTest.Fs(providedSrcPath, "dummyDstPath")
+			objectUnderTest.OS(providedSrcPath, "dummyDstPath")
 
 			/* assert */
-			Expect(fakeFs.OpenArgsForCall(0)).To(Equal(providedSrcPath))
+			Expect(fakeOS.OpenArgsForCall(0)).To(Equal(providedSrcPath))
 		})
 		Context("fs.Open errors", func() {
 			It("returns expected error", func() {
 				/* arrange */
 				expectedError := errors.New("dummyError")
 
-				fakeFs := new(fs.Fake)
-				fakeFs.OpenReturns(nil, expectedError)
+				fakeOS := new(vos.Fake)
+				fakeOS.OpenReturns(nil, expectedError)
 
 				objectUnderTest := fileCopier{
-					fs: fakeFs,
+					os: fakeOS,
 				}
 
 				/* act */
-				actualError := objectUnderTest.Fs("dummySrcPath", "dummyDstPath")
+				actualError := objectUnderTest.OS("dummySrcPath", "dummyDstPath")
 
 				/* assert */
 				Expect(actualError).To(Equal(expectedError))
@@ -60,34 +60,34 @@ var _ = Context("fileCopier", func() {
 				providedSrcPath := "dummySrcPath"
 				providedDstPath := "dummyDstPath"
 
-				fakeFs := new(fs.Fake)
+				fakeOS := new(vos.Fake)
 				// trigger exit
-				fakeFs.StatReturns(nil, errors.New("dummyError"))
+				fakeOS.StatReturns(nil, errors.New("dummyError"))
 
 				objectUnderTest := fileCopier{
-					fs: fakeFs,
+					os: fakeOS,
 				}
 
 				/* act */
-				objectUnderTest.Fs(providedSrcPath, providedDstPath)
+				objectUnderTest.OS(providedSrcPath, providedDstPath)
 
 				/* assert */
-				Expect(fakeFs.StatArgsForCall(0)).To(Equal(providedSrcPath))
+				Expect(fakeOS.StatArgsForCall(0)).To(Equal(providedSrcPath))
 			})
 			Context("fs.Stat errors", func() {
 				It("returns expected error", func() {
 					/* arrange */
 					expectedError := errors.New("dummyError")
 
-					fakeFs := new(fs.Fake)
-					fakeFs.StatReturns(nil, expectedError)
+					fakeOS := new(vos.Fake)
+					fakeOS.StatReturns(nil, expectedError)
 
 					objectUnderTest := fileCopier{
-						fs: fakeFs,
+						os: fakeOS,
 					}
 
 					/* act */
-					actualError := objectUnderTest.Fs("dummySrcPath", "dummyDstPath")
+					actualError := objectUnderTest.OS("dummySrcPath", "dummyDstPath")
 
 					/* assert */
 					Expect(actualError).To(Equal(expectedError))
@@ -98,34 +98,34 @@ var _ = Context("fileCopier", func() {
 					/* arrange */
 					providedDstPath := "dummyDstPath"
 
-					fakeFs := new(fs.Fake)
+					fakeOS := new(vos.Fake)
 					// trigger exit
-					fakeFs.CreateReturns(nil, errors.New("dummyError"))
+					fakeOS.CreateReturns(nil, errors.New("dummyError"))
 
 					objectUnderTest := fileCopier{
-						fs: fakeFs,
+						os: fakeOS,
 					}
 
 					/* act */
-					objectUnderTest.Fs("dummySrcPath", providedDstPath)
+					objectUnderTest.OS("dummySrcPath", providedDstPath)
 
 					/* assert */
-					Expect(fakeFs.CreateArgsForCall(0)).To(Equal(providedDstPath))
+					Expect(fakeOS.CreateArgsForCall(0)).To(Equal(providedDstPath))
 				})
 				Context("fs.Create errors", func() {
 					It("returns expected error", func() {
 						/* arrange */
 						expectedError := errors.New("dummyError")
 
-						fakeFs := new(fs.Fake)
-						fakeFs.CreateReturns(nil, expectedError)
+						fakeOS := new(vos.Fake)
+						fakeOS.CreateReturns(nil, expectedError)
 
 						objectUnderTest := fileCopier{
-							fs: fakeFs,
+							os: fakeOS,
 						}
 
 						/* act */
-						actualError := objectUnderTest.Fs("dummySrcPath", "dummyDstPath")
+						actualError := objectUnderTest.OS("dummySrcPath", "dummyDstPath")
 
 						/* assert */
 						Expect(actualError).To(Equal(expectedError))
@@ -136,7 +136,7 @@ var _ = Context("fileCopier", func() {
 						/* arrange */
 						providedDstPath := "dummyDstPath"
 
-						fakeFs := new(fs.Fake)
+						fakeOS := new(vos.Fake)
 
 						// create a real srcFile; no good way to stub os.FileInfo
 						srcFile, err := ioutil.TempFile("", "fileCopier_test")
@@ -149,20 +149,20 @@ var _ = Context("fileCopier", func() {
 							panic(err)
 						}
 
-						fakeFs.StatReturns(srcFileInfo, nil)
+						fakeOS.StatReturns(srcFileInfo, nil)
 
 						// trigger exit
-						fakeFs.ChmodReturns(errors.New("dummyError"))
+						fakeOS.ChmodReturns(errors.New("dummyError"))
 
 						objectUnderTest := fileCopier{
-							fs: fakeFs,
+							os: fakeOS,
 						}
 
 						/* act */
-						objectUnderTest.Fs("dummySrcPath", providedDstPath)
+						objectUnderTest.OS("dummySrcPath", providedDstPath)
 
 						/* assert */
-						actualDstPath, actualMode := fakeFs.ChmodArgsForCall(0)
+						actualDstPath, actualMode := fakeOS.ChmodArgsForCall(0)
 
 						Expect(actualDstPath).To(Equal(providedDstPath))
 						Expect(actualMode).To(Equal(srcFileInfo.Mode()))
@@ -170,7 +170,7 @@ var _ = Context("fileCopier", func() {
 					Context("os.Chmod errors", func() {
 						It("should return expected error", func() {
 							/* arrange */
-							fakeFs := new(fs.Fake)
+							fakeOS := new(vos.Fake)
 
 							// create a real srcFile; no good way to stub os.FileInfo
 							srcFile, err := ioutil.TempFile("", "fileCopier_test")
@@ -182,17 +182,17 @@ var _ = Context("fileCopier", func() {
 							if nil != err {
 								panic(err)
 							}
-							fakeFs.StatReturns(srcFileInfo, nil)
+							fakeOS.StatReturns(srcFileInfo, nil)
 
 							objectUnderTest := fileCopier{
-								fs: fakeFs,
+								os: fakeOS,
 							}
 
 							expectedError := errors.New("dummyError")
-							fakeFs.ChmodReturns(expectedError)
+							fakeOS.ChmodReturns(expectedError)
 
 							/* act */
-							actualError := objectUnderTest.Fs("dummySrcPath", "dummyDstPath")
+							actualError := objectUnderTest.OS("dummySrcPath", "dummyDstPath")
 
 							/* assert */
 							Expect(actualError).To(Equal(expectedError))
@@ -202,7 +202,7 @@ var _ = Context("fileCopier", func() {
 						It("doesn't error", func() {
 
 							/* arrange */
-							fakeFs := new(fs.Fake)
+							fakeOS := new(vos.Fake)
 
 							// create a real srcFile; no good way to stub os.FileInfo
 							srcFile, err := ioutil.TempFile("", "fileCopier_test")
@@ -210,13 +210,13 @@ var _ = Context("fileCopier", func() {
 							if nil != err {
 								panic(err)
 							}
-							fakeFs.OpenReturns(srcFile, nil)
+							fakeOS.OpenReturns(srcFile, nil)
 
 							srcFileInfo, err := os.Stat(srcFile.Name())
 							if nil != err {
 								panic(err)
 							}
-							fakeFs.StatReturns(srcFileInfo, nil)
+							fakeOS.StatReturns(srcFileInfo, nil)
 
 							// create a real dstFile; no good way to stub os.FileInfo
 							dstFile, err := ioutil.TempFile("", "fileCopier_test")
@@ -224,14 +224,14 @@ var _ = Context("fileCopier", func() {
 							if nil != err {
 								panic(err)
 							}
-							fakeFs.CreateReturns(dstFile, nil)
+							fakeOS.CreateReturns(dstFile, nil)
 
 							objectUnderTest := fileCopier{
-								fs: fakeFs,
+								os: fakeOS,
 							}
 
 							/* act */
-							actualError := objectUnderTest.Fs("dummySrcPath", "dummyDstPath")
+							actualError := objectUnderTest.OS("dummySrcPath", "dummyDstPath")
 
 							/* assert */
 							Expect(actualError).To(BeNil())
