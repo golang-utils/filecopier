@@ -2,9 +2,9 @@ package filecopier
 
 import (
 	"errors"
+	"github.com/golang-interfaces/ios"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/golang-interfaces/ios"
 	"io/ioutil"
 	"os"
 )
